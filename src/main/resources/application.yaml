@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/customer_db
+    username: darkroot
+    password: '@darKrOot3646'
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        ddl-auto: none
+    open-in-view: false
+    show-sql: true
+server:
+  port: 8090
