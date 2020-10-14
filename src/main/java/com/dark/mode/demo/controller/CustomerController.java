@@ -32,6 +32,10 @@ public class CustomerController {
     @PostMapping("/save")
     public String add(@ModelAttribute Customer c) {
         var customer = customerService.save(c);
+        return getFormat(customer);
+    }
+
+    private String getFormat(Customer customer) {
         return String.format("%s#%s", Redirect.TO_CUSTOMER_LIST, customer.getId());
     }
 }
