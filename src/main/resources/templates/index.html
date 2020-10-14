@@ -18,7 +18,6 @@
         <table>
             <thead>
             <tr>
-                <th>ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
@@ -30,7 +29,6 @@
                 <td colspan="5">No data available at this moment.</td>
             </tr>
             <tr th:each="customer : ${customers}">
-                <td th:text="${customer.getId()}">1</td>
                 <td th:text="${customer.getFirstName()}">Juan</td>
                 <td th:text="${customer.getLastName()}">Dela Cruz</td>
                 <td th:text="${customer.getEmail()}">sample@email.com
