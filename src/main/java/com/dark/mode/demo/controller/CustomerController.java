@@ -18,7 +18,7 @@ public class CustomerController {
 
     @RequestMapping("/list")
     public String list(Model m) {
-        m.addAttribute("customers", customerService.getAllCustomers());
+        m.addAttribute("customers", customerService.getAllCustomersOrderByLastName());
         return "index";
     }
 
