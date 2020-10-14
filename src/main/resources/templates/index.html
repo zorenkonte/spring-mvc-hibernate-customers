@@ -3,14 +3,16 @@
 <head>
     <title>Customer List</title>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
-
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
 <body>
 <header>
     <h2>Customer Relationship Manager</h2>
 </header>
-<button class="button button-add">Add Customer</button>
+<label>
+    <input class="button button-add" onclick="addCustomer()"
+           value="Add Customer"/>
+</label>
 <section>
     <article>
         <table>
@@ -42,4 +44,10 @@
     </article>
 </section>
 </body>
+<script>
+    function addCustomer() {
+        window.location.href = 'add'
+        return false
+    }
+</script>
 </html>

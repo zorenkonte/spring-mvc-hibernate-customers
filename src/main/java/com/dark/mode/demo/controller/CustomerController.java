@@ -1,9 +1,13 @@
 package com.dark.mode.demo.controller;
 
+import com.dark.mode.demo.model.Customer;
 import com.dark.mode.demo.service.CustomerService;
+import com.dark.mode.demo.util.Redirect;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -13,8 +17,21 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @RequestMapping("/list")
-    public String list(Model model) {
-        model.addAttribute("customers", customerService.getAllCustomers());
+    public String list(Model m) {
+        m.addAttribute("customers", customerService.getAllCustomers());
         return "index";
+    }
+
+    @RequestMapping("/add")
+    public String add(Model m) {
+        Customer customer = new Customer();
+        m.addAttribute(customer);
+        return "add";
+    }
+
+    @PostMapping("/save")
+    public String add(@ModelAttribute Customer c) {
+        customerService.save(c);
+        return Redirect.TO_CUSTOMER_LIST;
     }
 }

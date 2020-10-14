@@ -15,4 +15,14 @@ public class CustomerServiceImpl implements CustomerService {
     public Iterable<Customer> getAllCustomers() {
         return customerDAO.findAll();
     }
+
+    @Override
+    public Iterable<Customer> getAllCustomersOrderByLastName() {
+        return customerDAO.findAllByOrderByLastName();
+    }
+
+    @Override
+    public Customer save(Customer c) {
+        return customerDAO.save(c);
+    }
 }

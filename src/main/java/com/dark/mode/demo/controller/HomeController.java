@@ -1,5 +1,6 @@
 package com.dark.mode.demo.controller;
 
+import com.dark.mode.demo.util.Redirect;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,6 +9,6 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home() {
-        return "redirect:/customer/list";
+        return Redirect.TO_CUSTOMER_LIST;
     }
 }
