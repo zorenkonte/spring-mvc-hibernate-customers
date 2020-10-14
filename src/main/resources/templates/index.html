@@ -50,7 +50,9 @@
     function flashRow() {
         let hash = window.location.hash.substr(1)
         let element = document.getElementById(`customer-${hash}`)
-        element.classList.add("flash");
+        if (element) {
+            element.classList.add("flash");
+        }
     }
 
     function addCustomer() {
