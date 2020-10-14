@@ -32,12 +32,10 @@ th {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
-    padding: 4px 8px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    font-size: 12px;
     transition-duration: 0.4s;
     cursor: pointer;
 }
@@ -45,11 +43,11 @@ th {
 .button-update {
     background-color: white;
     color: black;
-    border: 2px solid #4CAF50;
+    border: 2px solid #008CBA;
 }
 
 .button-update:hover {
-    background-color: #4CAF50;
+    background-color: #008CBA;
     color: white;
 }
 
@@ -67,9 +65,10 @@ th {
 .button-add {
     padding: 8px 16px;
     margin-bottom: 15px;
-    background-color: #008CBA;
+    background-color: #4CAF50;
     color: white;
-    border: 2px solid #008CBA;
+    border: 2px solid #4CAF50;
+    font-size: 16px;
 }
 
 .button-add:hover {
