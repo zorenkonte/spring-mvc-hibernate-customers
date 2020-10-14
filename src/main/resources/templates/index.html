@@ -28,7 +28,7 @@
             <tr th:if="${!customers.iterator().hasNext()}">
                 <td colspan="5">No data available at this moment.</td>
             </tr>
-            <tr th:each="customer : ${customers}">
+            <tr th:each="customer : ${customers}" th:id="|customer-${customer.getId()}|">
                 <td th:text="${customer.getLastName()}">Dela Cruz</td>
                 <td th:text="${customer.getFirstName()}">Juan</td>
                 <td th:text="${customer.getEmail()}">sample@email.com
@@ -43,6 +43,16 @@
 </section>
 </body>
 <script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        flashRow()
+    });
+
+    function flashRow() {
+        let hash = window.location.hash.substr(1)
+        let element = document.getElementById(`customer-${hash}`)
+        element.classList.add("flash");
+    }
+
     function addCustomer() {
         window.location.href = 'add'
         return false

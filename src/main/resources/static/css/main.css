@@ -130,3 +130,23 @@ form {
     -moz-box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.7);
     box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.7);
 }
+
+
+.flash {
+    animation: flashAnimation 6s ease-in-out 1 alternate backwards;
+}
+
+@keyframes flashAnimation {
+    0% {
+        background-color: inherit;
+    }
+
+    10%,
+    90% {
+        background-color: #ffb606;
+    }
+
+    100% {
+        background-color: inherit;
+    }
+}

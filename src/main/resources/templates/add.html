@@ -30,7 +30,7 @@
                 <input id="email" placeholder="Enter email" required th:field="${customer.email}" type="email">
 
                 <hr>
-                <p><a href="/customer/list">Back to list</a></p>
+                <p><a th:href="@{/customer/list}">Back to list</a></p>
                 <button class="register-btn" type="submit">Submit</button>
             </div>
         </form>
