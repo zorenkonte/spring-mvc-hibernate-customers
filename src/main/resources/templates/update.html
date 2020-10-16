@@ -11,7 +11,7 @@
 </header>
 <section>
     <article>
-        <form method="POST" th:action="@{/customer/save}" th:object="${customer}">
+        <form th:action="@{/customer/update}" th:method="PATCH" th:object="${customer}">
             <div class="container">
                 <h1>Update</h1>
                 <p>Keep your information up to date!</p>

@@ -11,7 +11,7 @@
 </header>
 <section>
     <article>
-        <form method="POST" th:action="@{/customer/save}" th:object="${customer}">
+        <form th:action="@{/customer/save}" th:method="POST" th:object="${customer}">
             <div class="container">
                 <h1>Register</h1>
                 <p>Please fill in this form to create an account.</p>
