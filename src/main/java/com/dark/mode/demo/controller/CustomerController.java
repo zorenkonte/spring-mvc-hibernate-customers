@@ -6,7 +6,10 @@ import com.dark.mode.demo.util.Redirect;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
@@ -28,6 +31,19 @@ public class CustomerController {
         return "add";
     }
 
+    @PostMapping("/save")
+    public String save(@ModelAttribute Customer c) {
+        customer = customerService.save(c);
+        return getFormat(customer);
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute Customer c) {
+        fillCustomer(c);
+        customerService.save(customer);
+        return getFormat(customer);
+    }
+
     @RequestMapping("/{id}/update")
     public String update(@PathVariable Integer id, Model m) {
         customer = customerService.findById(id)
@@ -36,20 +52,19 @@ public class CustomerController {
         return "update";
     }
 
-    @PostMapping("/save")
-    public String save(@ModelAttribute Customer c) {
-        if (null != customer.getId()) {
-            customer.setFirstName(c.getFirstName());
-            customer.setLastName(c.getLastName());
-            customer.setEmail(c.getEmail());
-        } else {
-            customer = c;
-        }
-        customer = customerService.save(customer);
-        return getFormat(customer);
+    @RequestMapping("/{id}/delete")
+    public String delete(@PathVariable Integer id) {
+        customerService.deleteCustomerById(id);
+        return Redirect.TO_CUSTOMER_LIST;
     }
 
-    private String getFormat(Customer customer) {
-        return String.format("%s#%s", Redirect.TO_CUSTOMER_LIST, customer.getId());
+    private void fillCustomer(Customer c) {
+        customer.setFirstName(c.getFirstName());
+        customer.setLastName(c.getLastName());
+        customer.setEmail(c.getEmail());
+    }
+
+    private String getFormat(Customer c) {
+        return String.format("%s#%s", Redirect.TO_CUSTOMER_LIST, c.getId());
     }
 }
