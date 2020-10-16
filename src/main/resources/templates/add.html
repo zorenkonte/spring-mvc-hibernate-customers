@@ -18,16 +18,16 @@
                 <hr>
 
                 <label for="first-name"><b>First Name</b>
-                    <input id="first-name" placeholder="Enter firstname" required th:field="${customer.firstName}"
+                    <input id="first-name" placeholder="Enter firstname" required th:field="*{firstName}"
                            type="text"/>
                 </label>
 
                 <label for="last-name"><b>Last Name</b></label>
-                <input id="last-name" placeholder="Enter lastname" required th:field="${customer.lastName}"
+                <input id="last-name" placeholder="Enter lastname" required th:field="*{lastName}"
                        type="text"/>
 
                 <label for="email"><b>Email</b></label>
-                <input id="email" placeholder="Enter email" required th:field="${customer.email}" type="email">
+                <input id="email" placeholder="Enter email" required th:field="*{email}" type="email">
 
                 <hr>
                 <p><a th:href="@{/customer/list}">Back to list</a></p>
