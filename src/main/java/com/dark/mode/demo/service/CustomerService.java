@@ -9,4 +9,5 @@ public interface CustomerService {
     Iterable<Customer> getAllCustomersOrderByLastName();
     Customer save(Customer c);
     Optional<Customer> findById(Integer id);
+    void deleteCustomerById(Integer id);
 }

@@ -32,4 +32,9 @@ public class CustomerServiceImpl implements CustomerService {
     public Optional<Customer> findById(Integer id) {
         return customerDAO.findById(id);
     }
+
+    @Override
+    public void deleteCustomerById(Integer id) {
+        customerDAO.deleteById(id);
+    }
 }
