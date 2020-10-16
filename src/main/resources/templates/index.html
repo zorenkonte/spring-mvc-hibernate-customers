@@ -10,7 +10,7 @@
     <h2>Customer Relationship Manager</h2>
 </header>
 <label>
-    <input class="button button-add" onclick="addCustomer()"
+    <input class="button button-add" onclick="toAddCustomer()"
            value="Add Customer"/>
 </label>
 <section>
@@ -34,7 +34,7 @@
                 <td th:text="${customer.getEmail()}">sample@email.com
                 <td>
                     <a class="button button-update" th:href="@{/customer/{id}/update(id=${customer.id})}">Update</a>
-                    <a class="button button-delete">Delete</a>
+                    <a class="button button-delete" th:href="@{/customer/{id}/delete(id=${customer.id})}">Delete</a>
                 </td>
             </tr>
             </tbody>
@@ -45,29 +45,38 @@
 <script>
     document.addEventListener("DOMContentLoaded", function (event) {
         flashRow()
-    });
+    })
 
-    let scrollTimeout;
-    let element;
+    document.addEventListener('scroll', function (event) {
+        clearTimeout(scrollTimeout)
+        scrollTimeout = setTimeout(function () {
+            if (element) {
+                element.classList.add("flash")
+            }
+        }, 100)
+    })
+
+    Array.from(document.getElementsByClassName('button-delete')).forEach(function (element) {
+        element.addEventListener('click', function (event) {
+            if (!confirm('Are you sure you want to delete this customer?')) {
+                event.preventDefault()
+            }
+        })
+    })
+
+    let scrollTimeout
+    let element
 
     function flashRow() {
         let hash = window.location.hash.substr(1)
         element = document.getElementById(`customer-${hash}`)
         if (element) {
-            element.scrollIntoView();
+            element.scrollIntoView()
         }
     }
 
-    document.addEventListener('scroll', function(event) {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(function() {
-            element.classList.add("flash");
-        }, 100);
-    });
-
-    function addCustomer() {
+    function toAddCustomer() {
         window.location.href = 'add'
-        return false
     }
 </script>
 </html>
