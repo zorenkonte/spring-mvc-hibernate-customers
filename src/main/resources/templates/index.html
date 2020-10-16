@@ -76,7 +76,7 @@
         element = document.getElementById(`customer-${hash}`)
         if (element && isScrollable()) {
             element.scrollIntoView()
-        } else {
+        } else if (element) {
             element.classList.add("flash")
         }
     }
