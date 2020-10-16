@@ -47,13 +47,23 @@
         flashRow()
     });
 
+    let scrollTimeout;
+    let element;
+
     function flashRow() {
         let hash = window.location.hash.substr(1)
-        let element = document.getElementById(`customer-${hash}`)
+        element = document.getElementById(`customer-${hash}`)
         if (element) {
-            element.classList.add("flash");
+            element.scrollIntoView();
         }
     }
+
+    document.addEventListener('scroll', function(event) {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function() {
+            element.classList.add("flash");
+        }, 100);
+    });
 
     function addCustomer() {
         window.location.href = 'add'
