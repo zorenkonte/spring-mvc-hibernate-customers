@@ -67,11 +67,17 @@
     let scrollTimeout
     let element
 
+    function isScrollable() {
+        return document.body.clientHeight > document.documentElement.clientHeight;
+    }
+
     function flashRow() {
         let hash = window.location.hash.substr(1)
         element = document.getElementById(`customer-${hash}`)
-        if (element) {
+        if (element && isScrollable()) {
             element.scrollIntoView()
+        } else {
+            element.classList.add("flash")
         }
     }
 
