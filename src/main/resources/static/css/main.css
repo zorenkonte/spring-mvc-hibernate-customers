@@ -38,6 +38,7 @@ th {
     font-size: 12px;
     transition-duration: 0.4s;
     cursor: pointer;
+    padding: 1px 6px;
 }
 
 .button-update {
@@ -104,7 +105,7 @@ hr {
 }
 
 /* Set a style for the submit button */
-.register-btn {
+.save-btn {
     background-color: #4CAF50;
     color: white;
     padding: 16px 20px;
@@ -115,7 +116,7 @@ hr {
     opacity: 0.9;
 }
 
-.register-btn:hover {
+.save-btn:hover {
     opacity: 1;
 }
 

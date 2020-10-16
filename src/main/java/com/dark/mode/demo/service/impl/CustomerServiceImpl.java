@@ -6,6 +6,8 @@ import com.dark.mode.demo.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
@@ -24,5 +26,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer save(Customer c) {
         return customerDAO.save(c);
+    }
+
+    @Override
+    public Optional<Customer> findById(Integer id) {
+        return customerDAO.findById(id);
     }
 }

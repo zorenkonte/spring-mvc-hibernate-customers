@@ -6,15 +6,14 @@ import com.dark.mode.demo.util.Redirect;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/customer")
 public class CustomerController {
     private final CustomerService customerService;
+    private Customer customer;
 
     @RequestMapping("/list")
     public String list(Model m) {
@@ -24,14 +23,29 @@ public class CustomerController {
 
     @RequestMapping("/add")
     public String add(Model m) {
-        Customer customer = new Customer();
+        customer = new Customer();
         m.addAttribute(customer);
         return "add";
     }
 
+    @RequestMapping("/{id}/update")
+    public String update(@PathVariable Integer id, Model m) {
+        customer = customerService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid customer Id:" + id));
+        m.addAttribute(customer);
+        return "update";
+    }
+
     @PostMapping("/save")
-    public String add(@ModelAttribute Customer c) {
-        var customer = customerService.save(c);
+    public String save(@ModelAttribute Customer c) {
+        if (null != customer.getId()) {
+            customer.setFirstName(c.getFirstName());
+            customer.setLastName(c.getLastName());
+            customer.setEmail(c.getEmail());
+        } else {
+            customer = c;
+        }
+        customer = customerService.save(customer);
         return getFormat(customer);
     }
 

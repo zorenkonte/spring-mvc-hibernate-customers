@@ -33,8 +33,8 @@
                 <td th:text="${customer.getFirstName()}">Juan</td>
                 <td th:text="${customer.getEmail()}">sample@email.com
                 <td>
-                    <button class="button button-update" th:value="${customer.getId()}">Update</button>
-                    <button class="button button-delete" th:value="${customer.getId()}">Delete</button>
+                    <a class="button button-update" th:href="@{/customer/{id}/update(id=${customer.id})}">Update</a>
+                    <a class="button button-delete">Delete</a>
                 </td>
             </tr>
             </tbody>
