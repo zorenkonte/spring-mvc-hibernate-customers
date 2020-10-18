@@ -17,7 +17,18 @@ Ensure you have this installed before proceeding further
 * Frontend
   * HTML, CSS and Javascript
   * Thymeleaf as server-side template engine
-  
+
+### RUNNING THE APPLICATION
+Open a command line (or terminal) and navigate to the folder where you have the project files. We can build and run the application by issuing the following command:
+
+----
+	mvnw spring-boot:run
+----
+
+Open your browser and in the address bar at the top enter http://localhost:8090. You should get a nice friendly response like this:
+
+![address](/screenshots/address.png?raw=true)
+
 ### SCREENSHOTS
 ##### Customer List
 ![list](/screenshots/list.png?raw=true)
