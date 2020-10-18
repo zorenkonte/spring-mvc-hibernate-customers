@@ -30,3 +30,7 @@ Ensure you have this installed before proceeding further
 
 ### DATABASE SCHEMA
 ![ER Diagram](/screenshots/database_schema.png?raw=true)
+
+### LICENSE
+Customer Relationship Manager is Open Source software released under the
+https://www.apache.org/licenses/LICENSE-2.0.html[Apache License, Version 2.0].
