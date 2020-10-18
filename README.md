@@ -32,5 +32,4 @@ Ensure you have this installed before proceeding further
 ![ER Diagram](/screenshots/database_schema.png?raw=true)
 
 ### LICENSE
-Customer Relationship Manager is Open Source software released under the
-https://www.apache.org/licenses/LICENSE-2.0.html[Apache License, Version 2.0].
+Customer Relationship Manager is Open Source software released under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html)
