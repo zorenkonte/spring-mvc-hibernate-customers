@@ -21,4 +21,11 @@ public class Customer {
     private String lastName;
     @Column(name = "email")
     private String email;
+    @Transient
+    @Setter(AccessLevel.NONE)
+    private String fullName;
+
+    public String getFullName() {
+        return String.format("%s, %s", this.getLastName(), this.getFirstName());
+    }
 }
