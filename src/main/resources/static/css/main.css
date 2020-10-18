@@ -186,9 +186,7 @@ form {
     background-color: #f44336;
 }
 
-/* Add padding and center-align text to the container */
-.container {
-    padding: 16px;
+.text-center {
     text-align: center;
 }
 
