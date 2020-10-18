@@ -19,11 +19,14 @@ Ensure you have this installed before proceeding further
   * Thymeleaf as server-side template engine
 
 ### RUNNING THE APPLICATION
+#### STEP 1:
+Make sure to run the sql script first before running the application. You can find the sql file [here](/src/main/resources/database.sql)
+#### STEP 2:
 Open a command line (or terminal) and navigate to the folder where you have the project files. We can build and run the application by issuing the following command:
 
-----
-	mvnw spring-boot:run
-----
+```
+mvnw spring-boot:run
+```
 
 Open your browser and in the address bar at the top enter http://localhost:8090. You should get a nice friendly response like this:
 
