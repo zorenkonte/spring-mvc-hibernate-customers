@@ -136,7 +136,7 @@ form {
 }
 
 .flash {
-    animation: flashAnimation 6s ease-in-out 1 alternate backwards;
+    animation: flashAnimation 2s ease-in-out 1 alternate backwards;
 }
 
 @keyframes flashAnimation {
