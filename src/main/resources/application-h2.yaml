@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    schema: classpath*:db/h2/schema.sql
+    data: classpath*:db/h2/data.sql
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:customer_db
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        ddl-auto: none
