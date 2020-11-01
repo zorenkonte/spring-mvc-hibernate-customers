@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://${SERVER:localhost}:${PORT:3306}/${DATABASE:customer_db}
+    url: jdbc:mysql://${DM_CRM_SERVER:localhost}:${DM_CRM_PORT:3306}/${DM_CRM_DATABASE:customer_db}
   jpa:
     properties:
       hibernate:
