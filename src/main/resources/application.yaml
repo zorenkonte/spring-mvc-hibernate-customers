@@ -1,13 +1,13 @@
 spring:
   datasource:
-    username: root
-    password: password
+    username: pNcPq11wWY
+    password: XL6MaQl60X
   jpa:
     open-in-view: false
     show-sql: true
     hibernate:
       ddl-auto: none
   profiles:
-    active: h2
+    active: mysql
 server:
   port: 8090
