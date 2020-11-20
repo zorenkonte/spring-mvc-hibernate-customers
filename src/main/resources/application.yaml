@@ -11,3 +11,5 @@ spring:
     active: ${DM_CRM_ACTIVE_PROFILE:h2}
 server:
   port: 8090
+  error:
+    include-stacktrace: never
