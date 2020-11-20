@@ -1,4 +1,4 @@
-package com.dark.mode.demo.controller;
+package com.dark.mode.demo.controller.web;
 
 import com.dark.mode.demo.model.Customer;
 import com.dark.mode.demo.service.CustomerService;
