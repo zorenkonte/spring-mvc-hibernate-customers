@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.stream.StreamSupport;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/customer")
@@ -41,9 +43,20 @@ public class CustomerRestController {
     }
 
     @GetMapping("/list/truncate")
-    public ResponseEntity<String> reset() {
+    public ResponseEntity<String> truncate() {
         utilityService.truncateTable();
         return ResponseEntity.ok("done");
+    }
+
+    @GetMapping("/list/populate")
+    public ResponseEntity<String> populate() {
+        long size = StreamSupport.stream(customerService.getAllCustomers().spliterator(), false).count();
+        if (size == 0) {
+            utilityService.populateTable();
+            return ResponseEntity.ok("done");
+        } else {
+            return ResponseEntity.ok("truncate table first");
+        }
     }
 
     private void findCustomer(Integer id) {

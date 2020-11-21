@@ -17,4 +17,10 @@ public class UtilityServiceImpl implements UtilityService {
     public void truncateTable() {
         customerDAO.truncateTable();
     }
+
+    @Override
+    @Transactional
+    public void populateTable() {
+        customerDAO.populateTable();
+    }
 }
