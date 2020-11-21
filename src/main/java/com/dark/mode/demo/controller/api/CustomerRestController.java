@@ -2,6 +2,7 @@ package com.dark.mode.demo.controller.api;
 
 import com.dark.mode.demo.model.Customer;
 import com.dark.mode.demo.service.CustomerService;
+import com.dark.mode.demo.service.UtilityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(maxAge = 3600)
 public class CustomerRestController {
     private final CustomerService customerService;
+    private final UtilityService utilityService;
     private Customer customer;
 
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public Iterable<Customer> list() {
         return customerService.getAllCustomersOrderByLastName();
     }
@@ -36,6 +38,12 @@ public class CustomerRestController {
         findCustomer(id);
         customerService.deleteCustomerById(id);
         return ResponseEntity.ok(String.format("Customer with Id: %s deleted!", id));
+    }
+
+    @GetMapping("/list/truncate")
+    public ResponseEntity<String> reset() {
+        utilityService.truncateTable();
+        return ResponseEntity.ok("done");
     }
 
     private void findCustomer(Integer id) {
