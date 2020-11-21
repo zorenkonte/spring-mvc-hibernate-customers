@@ -20,7 +20,7 @@ Ensure you have this installed before proceeding further
 
 ### RUNNING THE APPLICATION
 #### STEP 1:
-Make sure to run the sql script first before running the application. You can find the sql file [here](/db/mysql/database.sql)
+Make sure to run the sql script first before running the application. You can find the sql file [here](/src/main/resources/db/mysql/database.sql)
 #### STEP 2:
 Open a command line (or terminal) and navigate to the folder where you have the project files. We can build and run the application by issuing the following command:
 
