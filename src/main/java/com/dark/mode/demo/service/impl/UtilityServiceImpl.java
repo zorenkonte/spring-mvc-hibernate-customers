@@ -1,6 +1,7 @@
 package com.dark.mode.demo.service.impl;
 
 import com.dark.mode.demo.dao.CustomerDAO;
+import com.dark.mode.demo.model.Customer;
 import com.dark.mode.demo.service.UtilityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,7 @@ public class UtilityServiceImpl implements UtilityService {
         customerDAO.truncateTable();
     }
 
-    @Override
-    @Transactional
-    public void populateTable() {
-        customerDAO.populateTable();
+    public Iterable<Customer> populateTable(Iterable<Customer> customers) {
+        return customerDAO.saveAll(customers);
     }
 }

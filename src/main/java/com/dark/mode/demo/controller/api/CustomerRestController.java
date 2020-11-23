@@ -39,7 +39,7 @@ public class CustomerRestController {
     public ResponseEntity<String> delete(@PathVariable Integer id) {
         findCustomer(id);
         customerService.deleteCustomerById(id);
-        return ResponseEntity.ok(String.format("Customer with Id: %s deleted!", id));
+        return ResponseEntity.ok(String.format("Customer with Id: %d deleted!", id));
     }
 
     @GetMapping("/list/truncate")
@@ -48,14 +48,14 @@ public class CustomerRestController {
         return ResponseEntity.ok("done");
     }
 
-    @GetMapping("/list/populate")
-    public ResponseEntity<String> populate() {
-        long size = StreamSupport.stream(customerService.getAllCustomers().spliterator(), false).count();
+    @PostMapping("/list/populate")
+    public ResponseEntity<String> populate(@RequestBody Iterable<Customer> customers) {
+        var size = customerSize(customerService.getAllCustomers());
         if (size == 0) {
-            utilityService.populateTable();
-            return ResponseEntity.ok("done");
+            var savedCustomers = utilityService.populateTable(customers);
+            return ResponseEntity.ok(String.format("Added %d customers", customerSize(savedCustomers)));
         } else {
-            return ResponseEntity.ok("truncate table first");
+            return ResponseEntity.ok("Truncate table first");
         }
     }
 
@@ -68,5 +68,9 @@ public class CustomerRestController {
         customer.setFirstName(c.getFirstName());
         customer.setLastName(c.getLastName());
         customer.setEmail(c.getEmail());
+    }
+
+    private long customerSize(Iterable<Customer> customers) {
+        return StreamSupport.stream(customers.spliterator(), false).count();
     }
 }
