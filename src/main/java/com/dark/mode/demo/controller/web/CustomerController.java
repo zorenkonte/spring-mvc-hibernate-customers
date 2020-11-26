@@ -34,14 +34,14 @@ public class CustomerController {
     @PostMapping("/save")
     public String save(@ModelAttribute Customer c) {
         customer = customerService.save(c);
-        return getFormat(customer);
+        return getFormat(customer.getId().toString(), "?save");
     }
 
     @PostMapping("/update")
     public String update(@ModelAttribute Customer c) {
         fillCustomer(c);
         customerService.save(customer);
-        return getFormat(customer);
+        return getFormat(customer.getId().toString(), "?update");
     }
 
     @RequestMapping("/{id}/update")
@@ -55,7 +55,7 @@ public class CustomerController {
     @RequestMapping("/{id}/delete")
     public String delete(@PathVariable Integer id) {
         customerService.deleteCustomerById(id);
-        return Redirect.TO_CUSTOMER_LIST;
+        return getFormat(id.toString(), "?delete");
     }
 
     private void fillCustomer(Customer c) {
@@ -64,7 +64,7 @@ public class CustomerController {
         customer.setEmail(c.getEmail());
     }
 
-    private String getFormat(Customer c) {
-        return String.format("%s#%s", Redirect.TO_CUSTOMER_LIST, c.getId());
+    private String getFormat(String... args) {
+        return String.format("%s%s#%s", Redirect.TO_CUSTOMER_LIST, args[1], args[0]);
     }
 }
