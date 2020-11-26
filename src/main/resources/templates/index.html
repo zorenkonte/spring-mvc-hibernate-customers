@@ -19,7 +19,7 @@
 </label>
 <section>
     <article>
-        <table>
+        <table id="customers-table">
             <thead>
             <tr>
                 <th>Last Name</th>
@@ -30,7 +30,7 @@
             </thead>
             <tbody>
             <tr th:if="${!customers.iterator().hasNext()}">
-                <td colspan="5">No data available at this moment.</td>
+                <td class="text-center" colspan="5">No data available at this moment.</td>
             </tr>
             <tr th:each="customer : ${customers}" th:id="|customer-${customer.getId()}|">
                 <td th:text="${customer.getLastName()}">Dela Cruz</td>
@@ -68,6 +68,9 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         flashRow()
+        initPieSocket()
+        initDeleteButton()
+        userName = `user_${getRandomNumber()}`
     })
 
     document.addEventListener('scroll', function () {
@@ -79,16 +82,22 @@
         }, 100)
     })
 
-    Array.from(document.getElementsByClassName('button-delete')).forEach(function (element) {
-        element.addEventListener('click', function () {
-            let fullName = this.getAttribute('data-full-name')
-            let id = this.getAttribute('data-id')
-            openDeleteModal(fullName, id)
+    function initDeleteButton() {
+        Array.from(document.getElementsByClassName('button-delete')).forEach(function (element) {
+            element.addEventListener('click', function () {
+                let fullName = this.getAttribute('data-full-name')
+                let id = this.getAttribute('data-id')
+                openDeleteModal(fullName, id)
+            })
         })
-    })
+    }
 
     let scrollTimeout
     let element
+    let pieSocket
+    let userName
+    let channelID = 1
+    let socketApiKey = 'sdboILvx2pCHn49LXhwo4tTYzOFtLfm0vneolhfs'
 
     function isScrollable() {
         return document.body.clientHeight > document.documentElement.clientHeight
@@ -105,8 +114,7 @@
     }
 
     function flashRow() {
-        let hash = window.location.hash.substr(1)
-        element = document.getElementById(`customer-${hash}`)
+        element = getHashElement()
         if (element && isScrollable()) {
             element.scrollIntoView()
         } else if (element) {
@@ -114,8 +122,96 @@
         }
     }
 
+    function getHashElement() {
+        return document.getElementById(`customer-${getHashValue()}`)
+    }
+
+    function getHashValue() {
+        return window.location.hash.substr(1)
+    }
+
     function toAddCustomer() {
         window.location.href = 'add'
+    }
+
+    function getRandomNumber() {
+        return Math.floor(Math.random() * 1000)
+    }
+
+    function initPieSocket() {
+        pieSocket = new WebSocket(`wss://connect.websocket.in/v3/${channelID}?api_key=${socketApiKey}`)
+        pieSocket.onmessage = (message) => {
+            const {event, text} = JSON.parse(message.data)
+            if (event === 'add_customer') {
+                console.log(`New Data Added By : ${userName}`)
+                updateContent(text)
+            } else if (event === 'update_customer') {
+                console.log(`Customer with id : ${text.id} has been updated by user ${userName}`)
+                updateContent(text, true)
+            } else if (event === 'delete_customer') {
+                console.log(`Customer with id : ${text.id} has been deleted by user ${userName}`)
+                let row = document.getElementById(`customer-${text.id}`)
+                row.parentNode.removeChild(row)
+            }
+        }
+        pieSocket.onopen = () => {
+            socketResponse()
+        }
+    }
+
+    function socketResponse() {
+        let operation = window.location.search.replace("?", "")
+        let element = getHashElement()
+        let customer
+        if (element) {
+            customer = {
+                id: getHashValue(),
+                firstName: element.cells[0].innerText,
+                lastName: element.cells[1].innerText,
+                email: element.cells[2].innerText
+            }
+        }
+        if (operation === 'save') {
+            pieSocket.send(JSON.stringify({
+                event: 'add_customer',
+                sender: userName,
+                text: customer
+            }))
+        } else if (operation === 'update') {
+            pieSocket.send(JSON.stringify({
+                event: 'update_customer',
+                sender: userName,
+                text: customer
+            }))
+        } else if (operation === 'delete') {
+            pieSocket.send(JSON.stringify({
+                event: 'delete_customer',
+                sender: userName,
+                text: {
+                    id: getHashValue()
+                }
+            }))
+        }
+    }
+
+    function updateContent(customer, isUpdate = false) {
+        let element = document.getElementById('customers-table')
+            .getElementsByTagName('tbody')[0].insertRow()
+        if (isUpdate) {
+            element = document.getElementById(`customer-${customer.id}`)
+        }
+        element.setAttribute("id", `customer-${customer.id}`)
+        element.innerHTML =
+            `<tr>
+                <td>${customer.firstName}</td>
+                <td>${customer.lastName}</td>
+                <td>${customer.email}</td>
+                <td>
+                    <a class="button button-update" href="/customer/${customer.id}/update">Update</a>
+                    <a class="button button-delete" data-full-name="${customer.lastName}, ${customer.firstName}" data-id="${customer.id}">Delete</a>
+                </td>
+            </tr>`
+        initDeleteButton()
     }
 </script>
 </html>
