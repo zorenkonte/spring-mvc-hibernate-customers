@@ -66,11 +66,11 @@
 </div>
 </body>
 <script>
-    document.addEventListener('DOMContentLoaded', function (event) {
+    document.addEventListener('DOMContentLoaded', function () {
         flashRow()
     })
 
-    document.addEventListener('scroll', function (event) {
+    document.addEventListener('scroll', function () {
         clearTimeout(scrollTimeout)
         scrollTimeout = setTimeout(function () {
             if (element) {
@@ -80,7 +80,7 @@
     })
 
     Array.from(document.getElementsByClassName('button-delete')).forEach(function (element) {
-        element.addEventListener('click', function (event) {
+        element.addEventListener('click', function () {
             let fullName = this.getAttribute('data-full-name')
             let id = this.getAttribute('data-id')
             openDeleteModal(fullName, id)
