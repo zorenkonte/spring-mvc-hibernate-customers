@@ -7,43 +7,43 @@ import org.aspectj.lang.annotation.Pointcut;
 public class AspectConfig {
 
     @Pointcut("execution(* com.dark.mode.demo.controller.api.*.*(..))")
-    private void apiControllerPackage() {
+    public void apiControllerPackage() {
     }
 
     @Pointcut("execution(* com.dark.mode.demo.controller.web.*.*(..))")
-    private void webControllerPackage() {
+    public void webControllerPackage() {
     }
 
     @Pointcut("execution(* com.dark.mode.demo.dao.*.*(..))")
-    private void daoPackage() {
+    public void daoPackage() {
     }
 
     @Pointcut("execution(* com.dark.mode.demo.model.*.*(..))")
-    private void modelPackage() {
+    public void modelPackage() {
     }
 
     @Pointcut("execution(* com.dark.mode.demo.repository.*.*(..))")
-    private void repositoryPackage() {
+    public void repositoryPackage() {
     }
 
     @Pointcut("execution(* com.dark.mode.demo.service.*.*(..))")
-    private void serviceIntPackage() {
+    public void serviceIntPackage() {
     }
 
     @Pointcut("execution(* com.dark.mode.demo.service.impl.*.*(..))")
-    private void serviceImplPackage() {
+    public void serviceImplPackage() {
     }
 
     @Pointcut("apiControllerPackage() || webControllerPackage()")
-    private void controllerPackage() {
+    public void controllerPackage() {
     }
 
     @Pointcut("serviceImplPackage() || serviceIntPackage()")
-    private void servicePackage() {
+    public void servicePackage() {
     }
 
     @Pointcut("controllerPackage() || servicePackage() || daoPackage() || repositoryPackage() || modelPackage()")
-    private void appFlow() {
+    public void appFlow() {
     }
 
 }
