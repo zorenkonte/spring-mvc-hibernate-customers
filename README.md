@@ -35,6 +35,7 @@ Open your browser and in the address bar at the top enter http://localhost:8090.
 ### SCREENSHOTS
 ##### Customer List
 ![list](/screenshots/list.png?raw=true)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdarkmodeee%2Fspring-mvc-hibernate-customers.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdarkmodeee%2Fspring-mvc-hibernate-customers?ref=badge_shield)
 ##### Add Customer
 ![add](/screenshots/add.png?raw=true)
 ##### Update Customer
@@ -47,3 +48,5 @@ Open your browser and in the address bar at the top enter http://localhost:8090.
 
 ### LICENSE
 Customer Relationship Manager is Open Source software released under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html)
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fdarkmodeee%2Fspring-mvc-hibernate-customers.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fdarkmodeee%2Fspring-mvc-hibernate-customers?ref=badge_large)
